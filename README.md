@@ -1,50 +1,87 @@
-# Welcome to your Expo app 👋
+# Task Manager App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**Course:** F2025 MAD201-01 – Cross Platform Mobile Application  
+**Assignment:** 5  
+**Student:** Khushi Patel  
+**Student ID:** A00198843  
 
-## Get started
+---
 
-1. Install dependencies
+##  Overview
 
-   ```bash
-   npm install
-   ```
+This project is a simple Task Manager mobile application built using **React Native (Expo)**, **TypeScript**, and **Expo Router**.  
+The app allows users to manage daily tasks with a clean and easy-to-use interface.
 
-2. Start the app
+This assignment demonstrates:
 
-   ```bash
-   npx expo start
-   ```
+- Multi-screen navigation using **Stack** and **Tab** navigators  
+- Global state management using **Context API**  
+- Passing data between screens  
+- Basic UI layout and reusable components  
+- Expo Router file-based routing with TypeScript  
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+##  Features
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- Add a new task (title + description)
+- View all tasks on the *All Tasks* tab
+- View only completed tasks on the *Completed* tab
+- Mark tasks as completed/pending
+- View full task details
+- Delete tasks
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## Navigation Structure
 
-```bash
-npm run reset-project
-```
+This project uses **Expo Router**:
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Stack Navigation (`app/_layout.tsx`)
+- `(tabs)` → Main Tab Navigation
+- `add-task` → Add Task screen
+- `task-details` → Task Details screen
 
-## Learn more
+### Tab Navigation (`app/(tabs)/_layout.tsx`)
+- `all-tasks` → Shows all tasks
+- `completed` → Shows completed tasks only
 
-To learn more about developing your project with Expo, look at the following resources:
+The root route (`/`) redirects automatically to:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+`/(tabs)/all-tasks`
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+##  State Management
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+A global task store is implemented using **React Context API**:
+
+`context/TaskContext.tsx` includes:
+- `tasks` (array of task objects)
+- `addTask()`
+- `removeTask()`
+- `toggleComplete()`
+- `updateTask()`
+
+This allows all screens to share and update task data consistently.
+
+---
+
+##  Main Files
+
+### Core Screens
+- `app/(tabs)/all-tasks.tsx`
+- `app/(tabs)/completed.tsx`
+- `app/add-task.tsx`
+- `app/task-details.tsx`
+
+### Navigation
+- `app/_layout.tsx` (stack)
+- `app/(tabs)/_layout.tsx` (tabs)
+- `app/index.tsx` (redirect)
+
+### Logic
+- `context/TaskContext.tsx` (global state)
+
+### UI Component
+- `components/TaskItem.tsx`
